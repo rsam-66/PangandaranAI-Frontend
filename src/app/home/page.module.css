@@ -1,0 +1,138 @@
+.page {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.pillRow {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+/* Hide scrollbar on pills */
+.pillRow::-webkit-scrollbar {
+    display: none;
+}
+
+.pillRow {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Section */
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sectionTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.seeAll {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--primary);
+    white-space: nowrap;
+}
+
+.seeAll:hover {
+    text-decoration: underline;
+}
+
+/* Horizontal scroll for destination cards */
+.destinationScroll {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 4px 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.destinationScroll::-webkit-scrollbar {
+    display: none;
+}
+
+.destinationScroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Skeleton loading placeholder — matches DestinationCard dimensions */
+.skeletonCard {
+    flex-shrink: 0;
+    width: 160px;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+}
+
+.skeletonInfo {
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.loadingText {
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+
+/* "See All" card at end of horizontal scroll */
+.seeAllCard {
+    flex-shrink: 0;
+    width: 120px;
+    min-height: 160px;
+    background: var(--bg-surface);
+    border-radius: var(--radius-md);
+    border: 2px dashed var(--primary-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.seeAllCard span {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.seeAllCard:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.seeAllCard:hover span {
+    color: white;
+}
+
+.seeAllCard:hover svg path {
+    stroke: white;
+}
+
+.seeAllCard:active {
+    transform: scale(0.96);
+}

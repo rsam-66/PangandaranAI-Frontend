@@ -1,0 +1,32 @@
+.wrapper {
+    display: flex;
+    justify-content: flex-end;
+    animation: slideInRight 0.3s ease-out;
+}
+
+.bubble {
+    max-width: 80%;
+    background: var(--primary);
+    color: var(--text-on-primary);
+    border-radius: var(--radius-md);
+    border-top-right-radius: 4px;
+    padding: 10px 14px;
+}
+
+.content {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

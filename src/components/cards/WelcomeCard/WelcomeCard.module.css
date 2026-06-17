@@ -1,0 +1,166 @@
+/* Outer wrapper */
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    padding-bottom: 16px;
+}
+
+/* Background covering entire card — image rendered by Next.js <Image> inside */
+.bgImage {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.15) 0%,
+        rgba(0, 0, 0, 0.30) 50%,
+        rgba(0, 0, 0, 0.50) 100%
+    );
+    z-index: 1;
+}
+
+/* ---- Image / Hero area ---- */
+.imageArea {
+    position: relative;
+    z-index: 2;
+    min-height: 180px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.textContent {
+    position: relative;
+    z-index: 2;
+    padding: 24px 20px;
+}
+
+.greeting {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    color: white;
+}
+
+.greeting span {
+    font-weight: 700;
+}
+
+.greeting strong {
+    font-weight: 800;
+}
+
+.tagline {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 6px 0 0;
+}
+
+/* ---- Search Bar ---- */
+.searchBar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 6px 6px 16px;
+    margin: 0 16px;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 14px;
+    transition: background 0.2s;
+}
+
+.searchBar:focus-within {
+    background: white;
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+.searchInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13px;
+    color: var(--text-primary);
+    padding: 8px 0;
+}
+
+.searchInput::placeholder {
+    color: #999;
+}
+
+.searchButton {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.searchButton:hover {
+    background: var(--primary-dark);
+}
+
+.searchButton svg circle,
+.searchButton svg path {
+    stroke: white;
+}
+
+/* ---- Category Buttons ---- */
+.categoryRow {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 0 16px 2px;
+}
+
+.categoryRow::-webkit-scrollbar {
+    display: none;
+}
+
+.categoryBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 14px;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.categoryBtn:hover {
+    background: white;
+}
+
+.categoryIcon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}

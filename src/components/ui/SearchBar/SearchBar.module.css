@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    transition: border-color 0.2s;
+}
+
+.container:focus-within {
+    border-color: var(--primary-light);
+}
+
+.icon {
+    flex-shrink: 0;
+}
+
+.input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: var(--font);
+    font-size: 14px;
+    color: var(--text-primary);
+    outline: none;
+}
+
+.input::placeholder {
+    color: var(--text-secondary);
+}
+
+.clearBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 11px;
+    color: var(--text-secondary);
+    background: var(--border);
+    transition: background 0.2s;
+}
+
+.clearBtn:hover {
+    background: var(--text-secondary);
+    color: white;
+}

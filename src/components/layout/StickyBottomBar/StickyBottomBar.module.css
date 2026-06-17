@@ -1,0 +1,39 @@
+.bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px var(--space-md);
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-light);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
+    flex-shrink: 0;
+}
+
+.priceSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.cta {
+    padding: 12px 24px;
+    background: var(--primary);
+    color: var(--text-on-primary);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.cta:hover {
+    background: var(--primary-dark);
+}
+
+.cta:active {
+    transform: scale(0.97);
+}

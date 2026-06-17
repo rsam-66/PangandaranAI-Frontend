@@ -1,0 +1,343 @@
+/* Hero */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+}
+
+.heroImage {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.heroNav {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+.navBtn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: background 0.2s;
+}
+
+.navBtn:hover {
+    background: white;
+}
+
+/* Content */
+.content {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    padding-bottom: var(--space-xl);
+}
+
+.titleBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.titleRow {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    flex: 1;
+}
+
+.photoCountInline {
+    font-size: 12px;
+    color: var(--primary);
+    font-weight: 500;
+    white-space: nowrap;
+    margin-top: 4px;
+}
+
+.ratingRow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stars {
+    display: flex;
+    gap: 1px;
+}
+
+.starFull {
+    color: var(--star);
+    font-size: 14px;
+}
+
+.starEmpty {
+    color: var(--border);
+    font-size: 14px;
+}
+
+.reviewCount {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+/* Sections */
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sectionTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+/* Tentang */
+.description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.expanded {
+    display: block;
+    -webkit-line-clamp: unset;
+}
+
+.readMore {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--primary);
+    width: fit-content;
+}
+
+.readMore:hover {
+    text-decoration: underline;
+}
+
+/* Lokasi */
+.locationHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.locationSub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.openMapBtn {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    background: var(--primary);
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.openMapBtn:hover {
+    background: var(--primary-dark);
+}
+
+.addressCard {
+    display: flex;
+    gap: 10px;
+    padding: 12px;
+    background: var(--bg-surface);
+    border-radius: var(--radius-md);
+    align-items: flex-start;
+}
+
+.addressIcon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.addressName {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.addressDetail {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 2px 0 0;
+    line-height: 1.4;
+}
+
+/* Photos */
+.photoGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.photoItem {
+    height: 120px;
+    border-radius: var(--radius-md);
+    background-size: cover;
+    background-position: center;
+}
+
+/* Shared outline button */
+.outlineBtn {
+    padding: 10px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-align: center;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.outlineBtn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Ulasan */
+.ratingBig {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.ratingTotal {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.reviewList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.reviewCard {
+    padding: 14px;
+    background: var(--bg-surface);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.reviewHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.reviewAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.reviewMeta {
+    display: flex;
+    flex-direction: column;
+}
+
+.reviewName {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.reviewDate {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.reviewStars {
+    display: flex;
+    gap: 1px;
+}
+
+.reviewTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.reviewText {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* FAQ */
+.faqList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.faqItem {
+    padding: 12px;
+    background: var(--bg-surface);
+    border-radius: var(--radius-md);
+}
+
+.faqText {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}

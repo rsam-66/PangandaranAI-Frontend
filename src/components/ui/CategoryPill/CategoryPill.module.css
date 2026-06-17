@@ -1,0 +1,30 @@
+.pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 16px;
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    font-weight: 500;
+    border: 1.5px solid var(--primary);
+    color: var(--primary);
+    background: transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.pill:hover {
+    background: var(--primary-alpha);
+}
+
+.pill:active {
+    transform: scale(0.95);
+}
+
+.active {
+    background: var(--primary);
+    color: var(--text-on-primary);
+}
+
+.active:hover {
+    background: var(--primary-dark);
+}

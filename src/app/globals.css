@@ -1,0 +1,249 @@
+/* ============================================
+   PANGANDARAN.AI — Design System
+   Light theme with teal brand (#00897B)
+   Font: Inter (loaded via next/font in layout.js)
+   ============================================ */
+
+/* --- Design Tokens --- */
+:root {
+  /* Brand Colors */
+  --primary: #00897B;
+  --primary-dark: #00695C;
+  --primary-light: #4DB6AC;
+  --primary-alpha: rgba(0, 137, 123, 0.1);
+
+  /* Backgrounds */
+  --bg-primary: #FFFFFF;
+  --bg-surface: #F5F5F5;
+  --bg-card: #FFFFFF;
+  --bg-outer: #E8E8E8;
+
+  /* Text */
+  --text-primary: #212121;
+  --text-secondary: #757575;
+  --text-on-primary: #FFFFFF;
+  --text-link: #00897B;
+
+  /* Borders & Dividers */
+  --border: #E0E0E0;
+  --border-light: #F0F0F0;
+
+  /* Semantic */
+  --star: #FFC107;
+  --danger: #F44336;
+  --success: #4CAF50;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 24px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-container: 0 0 40px rgba(0, 0, 0, 0.15);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Layout */
+  --appbar-height: 56px;
+  --bottomnav-height: 60px;
+  --mobile-max-width: 430px;
+
+  /* Typography */
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* --- CSS Reset --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background: var(--bg-outer);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* --- Mobile Container Layout --- */
+.appWrapper {
+  width: 100%;
+  height: 100vh;
+  /* fallback for older browsers */
+  height: 100dvh;
+  /* dynamic viewport height — respects mobile address bar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-outer);
+}
+
+.mobileContainer {
+  width: 100%;
+  max-width: var(--mobile-max-width);
+  height: 100vh;
+  /* fallback */
+  height: 100dvh;
+  /* dynamic viewport height */
+  max-height: 100dvh;
+  background: var(--bg-primary);
+  position: relative;
+  box-shadow: var(--shadow-container);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* On actual mobile — go full width, no shadow */
+@media (max-width: 430px) {
+  .appWrapper {
+    background: var(--bg-primary);
+    align-items: stretch;
+    /* fill full height on mobile */
+  }
+
+  .mobileContainer {
+    box-shadow: none;
+    max-width: 100%;
+  }
+}
+
+/* --- Page Content Area --- */
+.pageContent {
+  flex: 1;
+  min-height: 0;
+  /* critical: allows flex child to shrink below content size */
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* --- Scrollbar Styling --- */
+.pageContent::-webkit-scrollbar {
+  width: 4px;
+}
+
+.pageContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pageContent::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+.pageContent::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Utility classes */
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}

@@ -1,0 +1,13 @@
+services:
+  frontend:
+    build:
+      context: ../pangandaran-ai_chatbot
+      dockerfile: Dockerfile
+      args:
+        - BACKEND_URL=https://memories-clan-shops-revolutionary.trycloudflare.com
+    container_name: chatbot-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - BACKEND_URL=https://memories-clan-shops-revolutionary.trycloudflare.com
+    restart: unless-stopped

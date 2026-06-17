@@ -1,0 +1,47 @@
+.page {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.heading {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.routeList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.emptyText {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+    padding: var(--space-xl) 0;
+}
+
+.loadMore {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--primary);
+    background: transparent;
+    border: 1.5px solid var(--primary);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+}
+
+.loadMore:hover {
+    background: var(--primary-alpha);
+}
+
+.loadMore:active {
+    transform: scale(0.98);
+}

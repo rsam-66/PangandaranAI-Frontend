@@ -1,0 +1,32 @@
+.page {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.resultCount {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Two-column grid for destination cards */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+/* Override card width to fill grid cell */
+.grid > * {
+    width: 100% !important;
+}
+
+.loadingText {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 40px 0;
+    grid-column: 1 / -1;
+}

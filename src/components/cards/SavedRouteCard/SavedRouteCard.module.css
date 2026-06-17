@@ -1,0 +1,109 @@
+.card {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    text-align: left;
+    width: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.card:active {
+    transform: scale(0.99);
+}
+
+.thumbnail {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.image {
+    object-fit: cover;
+}
+
+.info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ratingRow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stars {
+    display: flex;
+    gap: 1px;
+}
+
+.starFull {
+    color: var(--star);
+    font-size: 12px;
+}
+
+.starEmpty {
+    color: var(--border);
+    font-size: 12px;
+}
+
+.reviews {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.address {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.visitedBadge,
+.notVisitedBadge {
+    font-size: 11px;
+    font-weight: 500;
+    margin-top: 2px;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    width: fit-content;
+}
+
+.visitedBadge {
+    color: var(--success);
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.notVisitedBadge {
+    color: var(--text-secondary);
+    background: var(--bg-surface);
+}
+
+.savedDate {
+    font-size: 10px;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
