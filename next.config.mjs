@@ -4,7 +4,8 @@ const nextConfig = {
   output: 'standalone',    // Produces minimal build for Docker (no node_modules needed)
   compress: true,           // Enable gzip compression
   images: {
-    formats: ['image/webp'],
+    unoptimized: true,
+  formats: ['image/webp'],
     remotePatterns: [
       {
         protocol: 'https',
