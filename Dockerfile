@@ -15,7 +15,7 @@ COPY . .
 # BACKEND_URL must be available at build time so Next.js Server Components
 # (e.g. destinations page) can pre-render with real data.
 # Default is set for HF Spaces builds (override via --build-arg if needed).
-ARG BACKEND_URL=https://memories-clan-shops-revolutionary.trycloudflare.com
+ARG BACKEND_URL=https://dramatically-dodge-odds-tape.trycloudflare.com
 ENV BACKEND_URL=$BACKEND_URL
 
 RUN npm run build
@@ -30,7 +30,7 @@ ENV HOSTNAME=0.0.0.0
 # BACKEND_URL must also be set at runtime for the API proxy route.
 # ENV does NOT carry over from the builder stage in multi-stage builds.
 # HF Spaces secrets will override this if set; otherwise use the default.
-ARG BACKEND_URL=https://memories-clan-shops-revolutionary.trycloudflare.com
+ARG BACKEND_URL=https://dramatically-dodge-odds-tape.trycloudflare.com
 ENV BACKEND_URL=$BACKEND_URL
 
 RUN addgroup --system --gid 1001 nodejs
