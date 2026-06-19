@@ -4,10 +4,10 @@ services:
       context: ../pangandaran-ai_chatbot
       dockerfile: Dockerfile
       args:
-        - BACKEND_URL=https://investment-vision-attachments-floppy.trycloudflare.com
+        - BACKEND_URL=https://acclimate-sacrament-musket.ngrok-free.dev
     container_name: chatbot-frontend
     ports:
       - "3000:3000"
     environment:
-      - BACKEND_URL=https://investment-vision-attachments-floppy.trycloudflare.com
+      - BACKEND_URL=https://acclimate-sacrament-musket.ngrok-free.dev
     restart: unless-stopped
