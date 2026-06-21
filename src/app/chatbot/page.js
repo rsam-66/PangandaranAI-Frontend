@@ -3,13 +3,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addUserMessage, sendMessage, clearMessages, loadSessionMessages } from '@/store/chatSlice';
-import {
-    loadSessions,
-    createSession,
-    switchSession,
-    deleteSession,
-} from '@/store/historySlice';
+import { injectChatbotSlices } from '@/store/store';
 import { templatePrompts } from '@/data/faqData';
 import AppBar from '@/components/layout/AppBar/AppBar';
 import BottomNav from '@/components/layout/BottomNav/BottomNav';
@@ -32,6 +26,7 @@ export default function ChatbotPage() {
     const { sessions, activeSessionId, loading: sessionsLoading } = useSelector((state) => state.history);
     const { initialized } = useSelector((state) => state.auth);
     const chatEndRef = useRef(null);
+    const [slicesReady, setSlicesReady] = useState(false);
 
     // View: 'list' | 'chat'
     const [view, setView] = useState('list');
@@ -39,12 +34,28 @@ export default function ChatbotPage() {
     const hasMessages = messages.length > 0;
     const activeSession = sessions.find((s) => s.id === activeSessionId);
 
+    // Inject heavy Redux slices on first mount, then init auth
+    useEffect(() => {
+        let cancelled = false;
+        (async () => {
+            await injectChatbotSlices();
+            if (cancelled) return;
+            setSlicesReady(true);
+            // Dynamically import and dispatch auth init
+            const { initAuth } = await import('@/store/authSlice');
+            dispatch(initAuth());
+        })();
+        return () => { cancelled = true; };
+    }, [dispatch]);
+
     // Fetch sessions from API when auth is ready
     useEffect(() => {
-        if (initialized) {
+        if (!slicesReady || !initialized) return;
+        (async () => {
+            const { loadSessions } = await import('@/store/historySlice');
             dispatch(loadSessions());
-        }
-    }, [initialized, dispatch]);
+        })();
+    }, [initialized, slicesReady, dispatch]);
 
     // Auto-scroll to bottom when new messages arrive
     useEffect(() => {
@@ -66,6 +77,8 @@ export default function ChatbotPage() {
         }
 
         console.log('[ChatBot] Backend is healthy, creating session...');
+        const { createSession } = await import('@/store/historySlice');
+        const { clearMessages } = await import('@/store/chatSlice');
         const result = await dispatch(createSession('New Chat'));
         if (result.meta.requestStatus === 'fulfilled') {
             dispatch(clearMessages());
@@ -75,6 +88,8 @@ export default function ChatbotPage() {
 
 
     const handleOpenSession = async (session) => {
+        const { switchSession, deleteSession } = await import('@/store/historySlice');
+        const { loadSessionMessages } = await import('@/store/chatSlice');
         dispatch(switchSession(session.id));
         const result = await dispatch(loadSessionMessages(session.id));
         // If loading messages failed (e.g. session 404 on backend), treat it as
@@ -86,16 +101,18 @@ export default function ChatbotPage() {
         setView('chat');
     };
 
-    const handleDeleteSession = (e, sessionId) => {
+    const handleDeleteSession = async (e, sessionId) => {
         e.stopPropagation();
         const confirmed = window.confirm('Apakah Anda yakin ingin menghapus obrolan ini?');
         if (!confirmed) return;
         // Redux fulfilled/rejected both remove the session immediately.
         // Do NOT call loadSessions() — it re-fetches and may re-add ghost sessions.
+        const { deleteSession } = await import('@/store/historySlice');
         dispatch(deleteSession(sessionId));
     };
 
-    const handleBackToList = () => {
+    const handleBackToList = async () => {
+        const { clearMessages } = await import('@/store/chatSlice');
         dispatch(clearMessages());
         setView('list');
         // Do NOT call loadSessions() here — createSession.fulfilled already added
@@ -104,8 +121,10 @@ export default function ChatbotPage() {
 
     const handleSend = async (text) => {
         if (!text?.trim()) return;
+        const { addUserMessage, sendMessage } = await import('@/store/chatSlice');
         if (!activeSessionId) {
             // Create session first, then send
+            const { createSession } = await import('@/store/historySlice');
             const result = await dispatch(createSession('New Chat'));
             // If session creation failed, abort — don't send to a non-existent session
             if (result.meta.requestStatus !== 'fulfilled') return;

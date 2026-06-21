@@ -94,7 +94,7 @@
 
 .visitedBadge {
     color: var(--success);
-    background: rgba(76, 175, 80, 0.1);
+    background: #E8F5E9;
 }
 
 .notVisitedBadge {

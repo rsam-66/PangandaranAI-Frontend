@@ -7,8 +7,8 @@
 /* --- Design Tokens --- */
 :root {
   /* Brand Colors */
-  --primary: #00897B;
-  --primary-dark: #00695C;
+  --primary: #00796B;
+  --primary-dark: #005A4F;
   --primary-light: #4DB6AC;
   --primary-alpha: rgba(0, 137, 123, 0.1);
 
@@ -22,7 +22,7 @@
   --text-primary: #212121;
   --text-secondary: #757575;
   --text-on-primary: #FFFFFF;
-  --text-link: #00897B;
+  --text-link: #00796B;
 
   /* Borders & Dividers */
   --border: #E0E0E0;
@@ -31,7 +31,7 @@
   /* Semantic */
   --star: #FFC107;
   --danger: #F44336;
-  --success: #4CAF50;
+  --success: #2E7D32;
 
   /* Radius */
   --radius-sm: 8px;

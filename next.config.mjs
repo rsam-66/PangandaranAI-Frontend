@@ -12,6 +12,10 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    // Tree-shake large packages to reduce JS bundle size & TBT
+    optimizePackageImports: ['@reduxjs/toolkit', 'react-redux'],
+  },
 };
 
 export default nextConfig;

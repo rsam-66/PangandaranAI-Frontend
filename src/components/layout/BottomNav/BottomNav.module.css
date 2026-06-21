@@ -43,6 +43,6 @@
 }
 
 .active .label {
-    color: var(--primary);
+    color: var(--primary-dark);
     font-weight: 600;
 }
