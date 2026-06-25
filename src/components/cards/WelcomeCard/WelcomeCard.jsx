@@ -44,6 +44,8 @@ export default function WelcomeCard({ userName = "" }) {
           alt=""
           fill
           priority
+          fetchPriority="high"
+          quality={60}
           sizes="430px"
           style={{ objectFit: 'cover', objectPosition: 'center top' }}
         />

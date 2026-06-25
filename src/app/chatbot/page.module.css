@@ -79,8 +79,7 @@
 
 .sessionDate {
     font-size: 11px;
-    color: var(--text-secondary);
-    opacity: 0.7;
+    color: #666666;
 }
 
 .deleteBtn {

@@ -98,12 +98,11 @@
 }
 
 .notVisitedBadge {
-    color: var(--text-secondary);
+    color: #555555;
     background: var(--bg-surface);
 }
 
 .savedDate {
     font-size: 10px;
-    color: var(--text-secondary);
-    opacity: 0.8;
+    color: #666666;
 }

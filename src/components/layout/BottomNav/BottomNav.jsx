@@ -53,12 +53,12 @@ export default function BottomNav() {
             key={tab.id}
             className={`${styles.tab} ${isActive ? styles.active : ""}`}
             onClick={() => handleTabClick(tab)}
-            aria-label={tab.label}
           >
             <span className={styles.icon}>
               <img
                 src={isActive ? tab.iconTeal : tab.iconLight}
-                alt={tab.label}
+                alt=""
+                aria-hidden="true"
                 width={24}
                 height={24}
               />

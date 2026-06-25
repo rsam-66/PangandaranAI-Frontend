@@ -52,11 +52,13 @@ export default function SavedRouteCard({ destination, onClick, priority = false 
                     fill
                     sizes="80px"
                     priority={priority}
+                    fetchPriority={priority ? "high" : "auto"}
+                    quality={60}
                     className={styles.image}
                 />
             </div>
             <div className={styles.info}>
-                <h4 className={styles.title}>{title}</h4>
+                <h3 className={styles.title}>{title}</h3>
                 <div className={styles.ratingRow}>
                     <span className={styles.stars}>{renderStars(rating || 0)}</span>
                     <span className={styles.reviews}>{formatReviews(reviews || 0)}</span>
