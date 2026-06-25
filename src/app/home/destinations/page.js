@@ -2,7 +2,10 @@ import { destinations as staticDestinations } from '@/data/destinations';
 import AppBar from '@/components/layout/AppBar/AppBar';
 import BottomNav from '@/components/layout/BottomNav/BottomNav';
 import DestinationCard from '@/components/cards/DestinationCard/DestinationCard';
+import Pagination from '@/components/ui/Pagination/Pagination';
 import styles from './page.module.css';
+
+const ITEMS_PER_PAGE = 20;
 
 // Render on every request (not at build time) so BACKEND_URL is always available
 export const dynamic = 'force-dynamic';
@@ -13,19 +16,42 @@ const CATEGORY_LABELS = {
     hotel: 'Penginapan',
     wisata: 'Wisata',
     'tempat-penting': 'Rute & Tempat Penting',
+    'paket-wisata': 'Paket Wisata',
 };
 
 /**
- * Fetch data directly from backend (server-side — no proxy needed).
+ * Fetch ALL data for a category by paginating through the backend.
+ * Uses page=1,2,3... with limit=50 until all records are retrieved.
  * Maps backend format to frontend DestinationCard format.
  */
 async function fetchCategory(type) {
-    const res = await fetch(`${BACKEND_URL}/data/${type}`, {
-        next: { revalidate: 3600 }, // Cache for 1 hour
-    });
-    if (!res.ok) throw new Error(`Failed: ${res.status}`);
-    const json = await res.json();
-    return (json.data || json || []).map((item) => ({
+    const PAGE_SIZE = 10;
+    let allItems = [];
+    let page = 1;
+
+    while (true) {
+        const res = await fetch(
+            `${BACKEND_URL}/data/${type}?page=${page}&limit=${PAGE_SIZE}`,
+            {
+                next: { revalidate: 3600 }, // Cache for 1 hour
+                headers: { 'ngrok-skip-browser-warning': 'true' },
+            }
+        );
+        if (!res.ok) throw new Error(`Failed: ${res.status}`);
+
+        const json = await res.json();
+        const items = json.data || json || [];
+        allItems = allItems.concat(items);
+
+        // Stop when we got fewer items than the page size (last page)
+        if (items.length < PAGE_SIZE) break;
+
+        page++;
+        // Safety cap — never fetch more than 10 pages (500 items)
+        if (page > 10) break;
+    }
+
+    return allItems.map((item) => ({
         id: item.data_id || item.id?.toString(),
         title: item.name,
         image: item.image_url || '/images/default-image.webp',
@@ -38,10 +64,24 @@ async function fetchCategory(type) {
     }));
 }
 
+/**
+ * Safe wrapper — returns empty array if a single endpoint fails,
+ * so one broken table doesn't crash the entire search.
+ */
+async function safeFetchCategory(type) {
+    try {
+        return await fetchCategory(type);
+    } catch (err) {
+        console.warn(`[Destinations] Failed to fetch ${type}:`, err.message);
+        return [];
+    }
+}
+
 export default async function Page({ searchParams }) {
     const params = await searchParams;
     const query = params?.q || '';
     const category = params?.category || '';
+    const currentPage = Math.max(1, parseInt(params?.p || '1', 10));
 
     let destinations = [];
 
@@ -52,12 +92,16 @@ export default async function Page({ searchParams }) {
             destinations = await fetchCategory('wisata');
         } else if (category === 'tempat-penting') {
             destinations = await fetchCategory('tempat-penting');
+        } else if (category === 'paket-wisata') {
+            destinations = await fetchCategory('paket-wisata');
         } else {
-            const [wisata, hotel] = await Promise.all([
-                fetchCategory('wisata'),
-                fetchCategory('hotel'),
+            const [wisata, hotel, tempatPenting, paketWisata] = await Promise.all([
+                safeFetchCategory('wisata'),
+                safeFetchCategory('hotel'),
+                safeFetchCategory('tempat-penting'),
+                safeFetchCategory('paket-wisata'),
             ]);
-            destinations = [...wisata, ...hotel];
+            destinations = [...wisata, ...hotel, ...tempatPenting, ...paketWisata];
         }
 
         if (query) {
@@ -85,6 +129,13 @@ export default async function Page({ searchParams }) {
             ? `Hasil: "${query}"`
             : 'Semua Destinasi';
 
+    // --- Pagination logic ---
+    const totalItems = destinations.length;
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    const safePage = Math.min(currentPage, totalPages || 1);
+    const startIdx = (safePage - 1) * ITEMS_PER_PAGE;
+    const paginatedDestinations = destinations.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+
     return (
         <>
             <AppBar showBack title={pageTitle} />
@@ -92,12 +143,13 @@ export default async function Page({ searchParams }) {
             <main className="pageContent">
                 <div className={styles.page}>
                     <p className={styles.resultCount}>
-                        {destinations.length} destinasi ditemukan
+                        {totalItems} destinasi ditemukan
+                        {totalPages > 1 && ` — Halaman ${safePage} dari ${totalPages}`}
                     </p>
 
                     <div className={styles.grid}>
-                        {destinations.length > 0 ? (
-                            destinations.map((dest) => (
+                        {paginatedDestinations.length > 0 ? (
+                            paginatedDestinations.map((dest) => (
                                 <DestinationCard key={dest.id} destination={dest} />
                             ))
                         ) : (
@@ -106,6 +158,12 @@ export default async function Page({ searchParams }) {
                             </p>
                         )}
                     </div>
+
+                    <Pagination
+                        currentPage={safePage}
+                        totalPages={totalPages}
+                        totalItems={totalItems}
+                    />
                 </div>
             </main>
 

@@ -1,0 +1,83 @@
+/* ============================================
+   Pagination — URL-based page navigation
+   ============================================ */
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 0 16px;
+}
+
+/* Shared style for all buttons */
+.pageBtn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 8px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pageBtn:hover:not(.active):not(.disabled) {
+    background: var(--primary-alpha);
+    border-color: var(--primary-light);
+    color: var(--primary);
+}
+
+.pageBtn:active:not(.disabled) {
+    transform: scale(0.95);
+}
+
+/* Active page */
+.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--text-on-primary);
+    font-weight: 600;
+    cursor: default;
+    box-shadow: 0 2px 8px rgba(0, 121, 107, 0.3);
+}
+
+/* Disabled prev/next */
+.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Arrow icons */
+.arrow {
+    font-size: 16px;
+    line-height: 1;
+}
+
+/* Ellipsis dots */
+.ellipsis {
+    min-width: 28px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: default;
+    user-select: none;
+}
+
+/* Page info text */
+.pageInfo {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: 4px;
+}
